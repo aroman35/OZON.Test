@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace OZON.Test.Domain.Entities
+namespace OZON.Test.Domain.Entities.Abstractions
 {
-    public interface IBonus
+    public interface IBonus : IDomainEntity
     {
         IEmployee Employee { get; }
         DateTime BonusDate { get; }

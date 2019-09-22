@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace OZON.Test.Domain.Entities
+namespace OZON.Test.Domain.Entities.Abstractions
 {
-    public interface IEmployee
+    public interface IEmployee : IDomainEntity
     {
         string FirstName { get; }
         string LastName { get; }
