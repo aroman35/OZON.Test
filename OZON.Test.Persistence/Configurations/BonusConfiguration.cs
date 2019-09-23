@@ -1,17 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OZON.Test.Application.Infrastructure.Models;
+using OZON.Test.Application.Models;
 
 namespace OZON.Test.Persistence.Configurations
 {
-    public class BonusConfiguration : IEntityTypeConfiguration<IBonusPm>
+    public class BonusConfiguration : IEntityTypeConfiguration<BonusPm>
     {
-        public void Configure(EntityTypeBuilder<IBonusPm> builder)
+        public void Configure(EntityTypeBuilder<BonusPm> builder)
         {
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            
+            
             builder.HasOne(x => x.Employee)
                 .WithMany(b => b.Bonuses)
-                .HasForeignKey(x => x.Id);
+                .HasForeignKey(x => x.EmployeeId);
 
             builder.Property(x => x.EmployeeId)
                 .HasColumnName("WORKER_ID");

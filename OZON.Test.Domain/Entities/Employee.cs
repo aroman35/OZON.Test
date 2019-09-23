@@ -21,7 +21,7 @@ namespace OZON.Test.Domain.Entities
             LastName = lastName;
             Salary = salary;
             JoiningDate = joiningDate;
-            Department = department ?? throw new DomainException("Department cannot be null", GetType());
+            Department = department;
         }
         
         public string FirstName { get; }

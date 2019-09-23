@@ -20,11 +20,10 @@ namespace OZON.Test.Application.Queries.EmployeesWithSameSalary
         public async Task<IDictionary<decimal, IEnumerable<IEmployee>>> Handle(EmployeesWithSameSalaryRequest request, CancellationToken cancellationToken)
         {
             var result = await _context.Employees
-                .AsNoTracking()
                 .GroupBy(x => x.Salary)
                 .OrderBy(x => x.Key)
                 .ToDictionaryAsync(x => x.Key,
-                    x => x.ToHashSet().Select(model =>
+                    x => x.Select(model =>
                         model.GetMappedModel(_mapper)),
                     cancellationToken: cancellationToken);
             
