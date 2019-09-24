@@ -10,23 +10,13 @@ namespace OZON.Test.Infrastructure.AutoMapper
     {
         public AutoMapperProfile()
         {
-            CreateMap<IDepartmentPm, IDepartment>()
-                .ConstructUsing(x => new Department(x.DepartmentName));
-            
-            CreateMap<IEmployeePm, IEmployee>()
+            CreateMap<IEmployeeDto, IEmployee>()
                 .ConstructUsing((x, y) =>
-                {
-                    var dept = y.Mapper.Map<IDepartment>(x.Department);
-                        return new Employee(x.FirstName, x.LastName, x.Salary, x.JoiningDate, dept);
-                    });
+                    new Employee(x.FirstName, x.LastName, x.Salary, x.JoiningDate, x.Department, y.Mapper.Map<IEmployee>(x.ReportTo)));
             
-            CreateMap<IBonusPm, IBonus>()
+            CreateMap<IBonusDto, IBonus>()
                 .ConstructUsing((model, ctx) =>
                     new Bonus(ctx.Mapper.Map<IEmployee>(model.Employee), model.BonusDate, model.BonusAmount));
-            
-            CreateMap<ITeamPm, ITeam>()
-                .ConstructUsing((model, ctx) =>
-                    new DreamTeam(ctx.Mapper.Map<IEmployee>(model.Lead), model.Members.Select(x => ctx.Mapper.Map<IEmployee>(x))));
         }
     }
 }

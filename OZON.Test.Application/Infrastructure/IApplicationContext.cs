@@ -9,10 +9,8 @@ namespace OZON.Test.Application.Infrastructure
 {
     public interface IApplicationContext : IDisposable
     {
-        DbSet<DepartmentPm> Departments { get; set; }
-        DbSet<EmployeePm> Employees { get; set; }
-        DbSet<BonusPm> Bonuses { get; set; }
-        DbSet<DreamTeamPm> Teams { get; set; }
+        DbSet<EmployeeDto> Employees { get; set; }
+        DbSet<BonusDto> Bonuses { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
         DatabaseFacade Database { get; }
         void DetachAllEntities();

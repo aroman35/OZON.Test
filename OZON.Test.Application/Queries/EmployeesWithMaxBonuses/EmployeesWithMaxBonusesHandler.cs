@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,35 +8,41 @@ using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OZON.Test.Application.Infrastructure;
-using OZON.Test.Domain.Entities.Abstractions;
+using OZON.Test.Application.Models;
+using OZON.Test.Domain.Extensions;
 
 namespace OZON.Test.Application.Queries.EmployeesWithMaxBonuses
 {
     public class EmployeesWithMaxBonusesHandler
-        : AbstractRequestHandler, IRequestHandler<EmployeesWithMaxBonusesRequest, IDictionary<IDepartment, Dictionary<IEmployee, decimal>>>
+        : AbstractRequestHandler, IRequestHandler<EmployeesWithMaxBonusesRequest, IDictionary<string, IEnumerable<string>>>
     {
         public EmployeesWithMaxBonusesHandler(IApplicationContext context, IMapper mapper) : base(context, mapper)
         {
             
         }
 
-        public async Task<IDictionary<IDepartment, Dictionary<IEmployee, decimal>>> Handle(EmployeesWithMaxBonusesRequest request,
+        public async Task<IDictionary<string, IEnumerable<string>>> Handle(EmployeesWithMaxBonusesRequest request,
             CancellationToken cancellationToken)
         {
-            var bonuses = await _context.Employees
-                .Include(x => x.Department)
+            var fiscalYearStartDate = DateTime.Parse($"1/1/{DateTime.Now.Year.ToString()}", new CultureInfo("en-US"));
+            
+            Func<IEnumerable<BonusDto>, decimal> getTotalByYear = bonuses =>
+                bonuses.Where(bonus => bonus.BonusDate > fiscalYearStartDate).Sum(bonus => bonus.BonusAmount);
+
+            var result = await _context.Employees
                 .Include(x => x.Bonuses)
                 .GroupBy(x => x.Department)
-                .ToDictionaryAsync(x => x.Key.GetMappedModel(_mapper),
+                .ToDictionaryAsync(x => x.Key.GetDescription(),
                     x =>
                     {
-                        var maxBonus = x.Key.Employees.OrderByDescending(e => e.Bonuses.Sum(b => b.BonusAmount)).First()
-                            .Bonuses.Sum(b => b.BonusAmount);
-                        return x.Key.Employees.Where(e => e.Bonuses.Sum(b => b.BonusAmount) == maxBonus)
-                            .ToDictionary(e => e.GetMappedModel(_mapper), _ => maxBonus);
-                    });
+                        var mvpEmployee = x.OrderByDescending(e => getTotalByYear(e.Bonuses)).First();
+                        var maxBonusCount = getTotalByYear(mvpEmployee.Bonuses);
 
-            return bonuses;
+                        return x.Where(e => getTotalByYear(e.Bonuses) == maxBonusCount)
+                            .Select(e => e.GetMappedModel(_mapper).ToString());
+                    }, cancellationToken);
+
+            return result;
         }
     }
 }

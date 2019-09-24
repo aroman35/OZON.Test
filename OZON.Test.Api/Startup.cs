@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OZON.Test.Api.Settings;
+using OZON.Test.Application.Commands;
+using OZON.Test.Application.Commands.SeedTestData;
 using OZON.Test.Application.Infrastructure;
 using OZON.Test.Infrastructure.Extensions;
 using OZON.Test.Persistence;
@@ -28,11 +31,15 @@ namespace OZON.Test.Api
                 .AddMediatorServices()
                 .AddEntityFrameworkNpgsql()
                 .AddDbContext<IApplicationContext, ApplicationContext>(opts =>
-                    {
-                        opts.UseNpgsql(Configuration.GetConnectionString("ApplicationDb"));
-                        opts.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-                    });
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                {
+                    opts.UseNpgsql(Configuration.GetConnectionString("ApplicationDb"));
+                    opts.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                })
+                .AddTransient<TestDataGenerator>()
+                .AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(opts =>
+                    opts.SerializerSettings.ContractResolver = new IgnoreEmptyEnumerablesResolver());
             
             services.AddSwaggerGen(c =>
             {

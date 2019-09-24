@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace OZON.Test.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("api/")]
     public abstract class BaseController : ControllerBase
     {
         private IMediator _mediator;

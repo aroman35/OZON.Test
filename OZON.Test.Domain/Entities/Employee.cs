@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using OZON.Test.Domain.Entities.Abstractions;
+using OZON.Test.Domain.Entities.Enums;
 using OZON.Test.Domain.Exceptions;
 
 namespace OZON.Test.Domain.Entities
@@ -11,7 +13,8 @@ namespace OZON.Test.Domain.Entities
             string lastName,
             decimal salary,
             DateTime joiningDate,
-            IDepartment department)
+            Departments department,
+            IEmployee reportTo = default)
         {
             if (string.IsNullOrEmpty(firstName)) throw new DomainException("First name cannot be null", GetType());
             if (string.IsNullOrEmpty(lastName)) throw new DomainException("Last name cannot be null", GetType());
@@ -22,12 +25,24 @@ namespace OZON.Test.Domain.Entities
             Salary = salary;
             JoiningDate = joiningDate;
             Department = department;
+            ReportTo = reportTo;
+            Bonuses = new HashSet<IBonus>();
         }
-        
+        public IEmployee ReportTo { get; }
         public string FirstName { get; }
         public string LastName { get; }
         public decimal Salary { get; }
         public DateTime JoiningDate { get; }
-        public IDepartment Department { get; }
+        public Departments Department { get; }
+        public void AddBonus(decimal amount)
+        {
+            Bonuses.Add(new Bonus(this, DateTime.Now, amount));
+        }
+
+        public ICollection<IBonus> Bonuses { get; }
+        
+
+        public override string ToString() =>
+            $"{FirstName} {LastName}";
     }
 }

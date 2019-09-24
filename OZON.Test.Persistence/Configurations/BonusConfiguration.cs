@@ -4,12 +4,15 @@ using OZON.Test.Application.Models;
 
 namespace OZON.Test.Persistence.Configurations
 {
-    public class BonusConfiguration : IEntityTypeConfiguration<BonusPm>
+    public class BonusConfiguration : IEntityTypeConfiguration<BonusDto>
     {
-        public void Configure(EntityTypeBuilder<BonusPm> builder)
+        public void Configure(EntityTypeBuilder<BonusDto> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            
+            builder.Property(x => x.Id)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("ID");;
             
             
             builder.HasOne(x => x.Employee)

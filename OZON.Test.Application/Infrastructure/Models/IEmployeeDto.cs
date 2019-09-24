@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using OZON.Test.Application.Models;
 using OZON.Test.Domain.Entities.Abstractions;
+using OZON.Test.Domain.Entities.Enums;
 
 namespace OZON.Test.Application.Infrastructure.Models
 {
-    public interface IEmployeePm : IDto<IEmployee>
+    public interface IEmployeeDto : IDto<IEmployee>
     {
-        int DepartmentId { get; set; }
+        int? ReportToId { get; set; }
+        EmployeeDto ReportTo { get; set; }
         string FirstName { get; set; }
         string LastName { get; set; }
         decimal Salary { get; set; }
         DateTime JoiningDate { get; set; }
-        DepartmentPm Department { get; set; }
-        IEnumerable<BonusPm> Bonuses { get; set; }
-        
-        int? TeamId { get; set; }
-        DreamTeamPm Team { get; set; }
+        Departments Department { get; set; }
+        List<BonusDto> Bonuses { get; set; }
+        IEnumerable<EmployeeDto> ReportedEmployees { get; set; }
     }
 }

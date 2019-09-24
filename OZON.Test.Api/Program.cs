@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OZON.Test.Application.Commands;
+using OZON.Test.Application.Commands.SeedTestData;
 using OZON.Test.Application.Infrastructure;
 using OZON.Test.Persistence;
 
@@ -27,7 +28,7 @@ namespace OZON.Test.Api
             using (var scope = host.Services.CreateScope())
             {
                 var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
-                await mediator.Send(new SeedTestDataCommand());
+                await mediator.Send(new SeedTestDataCommand(10000));
             }
 
             await host.RunAsync();

@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OZON.Test.Domain", "OZON.Test.Domain\OZON.Test.Domain.csproj", "{7CA126B1-C04C-4CF7-A7DE-E6360453E847}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OZON.Test.Application", "OZON.Test.Application\OZON.Test.Application.csproj", "{1A5B969E-B66D-41C0-A568-1E9A4B6641B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OZON.Test.Persistence", "OZON.Test.Persistence\OZON.Test.Persistence.csproj", "{4879A5DE-13CC-4324-BE5F-3A7D35314BDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OZON.Test.Api", "OZON.Test.Api\OZON.Test.Api.csproj", "{34B2B6AF-AE4B-4DB2-83D8-0270E6E735BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OZON.Test.Infrastructure", "OZON.Test.Infrastructure\OZON.Test.Infrastructure.csproj", "{27222B93-B64D-4CA6-A078-9CE9B9426D1D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7CA126B1-C04C-4CF7-A7DE-E6360453E847}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CA126B1-C04C-4CF7-A7DE-E6360453E847}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CA126B1-C04C-4CF7-A7DE-E6360453E847}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CA126B1-C04C-4CF7-A7DE-E6360453E847}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A5B969E-B66D-41C0-A568-1E9A4B6641B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A5B969E-B66D-41C0-A568-1E9A4B6641B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A5B969E-B66D-41C0-A568-1E9A4B6641B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A5B969E-B66D-41C0-A568-1E9A4B6641B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4879A5DE-13CC-4324-BE5F-3A7D35314BDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4879A5DE-13CC-4324-BE5F-3A7D35314BDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4879A5DE-13CC-4324-BE5F-3A7D35314BDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4879A5DE-13CC-4324-BE5F-3A7D35314BDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34B2B6AF-AE4B-4DB2-83D8-0270E6E735BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34B2B6AF-AE4B-4DB2-83D8-0270E6E735BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34B2B6AF-AE4B-4DB2-83D8-0270E6E735BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34B2B6AF-AE4B-4DB2-83D8-0270E6E735BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27222B93-B64D-4CA6-A078-9CE9B9426D1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27222B93-B64D-4CA6-A078-9CE9B9426D1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27222B93-B64D-4CA6-A078-9CE9B9426D1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27222B93-B64D-4CA6-A078-9CE9B9426D1D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

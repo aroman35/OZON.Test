@@ -4,10 +4,10 @@ using OZON.Test.Domain.Entities.Abstractions;
 
 namespace OZON.Test.Application.Infrastructure.Models
 {
-    public interface IBonusPm : IDto <IBonus>
+    public interface IBonusDto : IDto <IBonus>
     {
         int EmployeeId { get; set; }
-        EmployeePm Employee { get; set; }
+        EmployeeDto Employee { get; set; }
         DateTime BonusDate { get; set; }
         decimal BonusAmount { get; set; }
     }

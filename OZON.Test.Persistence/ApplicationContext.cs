@@ -11,11 +11,9 @@ namespace OZON.Test.Persistence
             : base(options)
         {
         }
-        public DbSet<DepartmentPm> Departments { get; set; }
-        public DbSet<EmployeePm> Employees { get; set; }
-        public DbSet<BonusPm> Bonuses { get; set; }
-        public DbSet<DreamTeamPm> Teams { get; set; }
-        
+        public DbSet<EmployeeDto> Employees { get; set; }
+        public DbSet<BonusDto> Bonuses { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationContext).Assembly);
 
